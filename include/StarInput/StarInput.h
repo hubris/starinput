@@ -1,6 +1,8 @@
 #ifndef STARINPUT_H
 #define STARINPUT_H
 
+#include <StarInput/StarInputListener.h>
+
 #include <list>
 
 namespace Star
@@ -24,7 +26,7 @@ namespace Star
     virtual void updateState() = 0;
 
   private:
-    typedef std::list<StarInputListener*> ListenerList;
+    typedef std::list<InputListener*> ListenerList;
     ListenerList m_listeners;
   };
 }

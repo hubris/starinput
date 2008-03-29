@@ -1,9 +1,13 @@
 #include <StarInput/StarInput.h>
+
+#include <algorithm>
+#include <cassert>
+
 namespace Star
 {
 /******************************************************************************/
   void
-  Input::addListener(StarInputListener* listener)
+  Input::addListener(InputListener* listener)
   {
     ListenerList::iterator it;
     it = std::find(m_listeners.begin(), m_listeners.end(), listener);
@@ -14,7 +18,7 @@ namespace Star
 
 /******************************************************************************/
   void
-  Input::removeListener(StarInputListener* listener)
+  Input::removeListener(InputListener* listener)
   {
     m_listeners.remove(listener);
   }
