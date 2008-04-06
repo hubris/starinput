@@ -9,11 +9,19 @@ namespace Star
   {
   public:
     /**
+     * Constructor
+     */
+    MouseSDL() : m_buttonState(0), m_x(0), m_y(0)
+    {
+    }
+
+    /**
      * Return absolute position of the mouse
      */
     virtual void getPosition(int& x, int& y) const
     {
-      x = y = 0;
+      x = m_x;
+      y = m_y;
     }
 
     /**
@@ -21,7 +29,7 @@ namespace Star
      */
     virtual bool isButtonPressed(int button) const
     {
-      return false;
+      return m_buttonState&SDL_BUTTON(button);
     }
 
     /**
@@ -29,7 +37,13 @@ namespace Star
      */
     virtual void updateState()
     {
+      m_buttonState = SDL_GetMouseState(&m_pos[0], &m_pos[1]);
     }
+
+  private:
+    Uint8 m_buttonState;
+    int m_x;
+    int m_y;
   };
 }
 
