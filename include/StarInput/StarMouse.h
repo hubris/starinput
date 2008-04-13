@@ -1,14 +1,24 @@
 #ifndef STARMOUSE_H
 #define STARMOUSE_H
 
-#include <StarUtils/Singleton.h>
-#include <StarInput/MouseSDL.h>
+#include <StarUtils/StarSingleton.h>
+#include <StarInput/StarMouseSDL.h>
 
 namespace Star
 {
   class Mouse : public Singleton<Mouse>
   {
   public:
+    Mouse()
+    {
+      m_mouse = new MouseSDL();
+    }
+
+    ~Mouse()
+    {
+      delete m_mouse;
+    }
+
     /**
      * Return absolute position of the mouse
      */
@@ -25,20 +35,26 @@ namespace Star
       return m_mouse->isButtonPressed(button);
     }
 
-  protected:
-    Mouse()
-    {
-      m_mouse = new MouseSDL();
-    }
+    /**
+     * Add a listener
+     */
+    void addListener(MouseListener* listener);
 
-    ~Mouse()
-    {
-      delete m_mouse;
-    }
+    /**
+     * Remove a listener
+     */
+    void removeListener(MouseListener* listener);
+
+    /**
+     * Check all state and notify listener of state change
+     */
+    void updateState() { m_mouse->updateState(); }
 
   private:
     MouseInterface* m_mouse;
   };
+
+#define g_StarMouse (*Star::Mouse::getInstance())
 }
 
 #endif

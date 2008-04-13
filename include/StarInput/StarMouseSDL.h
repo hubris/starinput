@@ -2,6 +2,9 @@
 #define STARMOUSESDL_H
 
 #include <StarInput/StarMouseInterface.h>
+#include <StarInput/StarMouseEvent.h>
+
+#include <SDL.h>
 
 namespace Star
 {
@@ -37,7 +40,21 @@ namespace Star
      */
     virtual void updateState()
     {
-      m_buttonState = SDL_GetMouseState(&m_pos[0], &m_pos[1]);
+      Uint8 oldState = m_buttonState;
+      int oldX = m_x;
+      int oldY = m_y;
+      m_buttonState = SDL_GetMouseState(&m_x, &m_y);
+
+      if(m_buttonState != oldState) {
+        for(int i = 1; i <= 5; i++) {
+          bool pressed = m_buttonState&SDL_BUTTON(i);
+          if(pressed != oldState&SDL_BUTTON(i))
+            pressed?notifyListener(MouseButtonPressedEvent(i)):notifyListener(MouseButtonReleasedEvent(i));
+        }
+      }
+
+      if(m_x != oldX || m_y != oldY)
+        notifyListener(MouseMoveEvent(m_x, m_y, m_x-oldX, m_y-oldY));
     }
 
   private:

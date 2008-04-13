@@ -1,4 +1,5 @@
 #include <StarInput/StarInput.h>
+#include <StarInput/StarInputListener.h>
 
 #include <algorithm>
 #include <cassert>

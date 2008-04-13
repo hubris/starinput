@@ -1,12 +1,12 @@
-#ifndef STARINPUT_H
-#define STARINPUT_H
-
-#include <StarInput/StarInputListener.h>
+#ifndef STARINPUTINT_H
+#define STARINPUTINT_H
 
 #include <list>
 
 namespace Star
 {
+  class InputListener;
+
   class Input
   {
   public:
@@ -25,7 +25,7 @@ namespace Star
      */
     virtual void updateState() = 0;
 
-  private:
+  protected:
     typedef std::list<InputListener*> ListenerList;
     ListenerList m_listeners;
   };
