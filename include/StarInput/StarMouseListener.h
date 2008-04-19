@@ -8,10 +8,15 @@ namespace Star
   class MouseListener : public InputListener
   {
   public:
-    virtual void mouseClicked(const MouseButtonEvent& e) {}
-    virtual void mousePressed(const MouseButtonPressedEvent& e) {}
-    virtual void mouseReleased(const MouseButtonReleasedEvent& e) {}
-    virtual void mouseMoved(const MouseMoveEvent& e) {}
+    /**
+     * Destructor
+     */
+    virtual ~MouseListener() {}
+
+    virtual void mouseClicked(const MouseButtonEvent&) {}
+    virtual void mousePressed(const MouseButtonPressedEvent&) {}
+    virtual void mouseReleased(const MouseButtonReleasedEvent&) {}
+    virtual void mouseMoved(const MouseMoveEvent&) {}
   };
 }
 

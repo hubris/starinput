@@ -14,6 +14,11 @@ namespace Star
   {
   public:
     /**
+     * Destructor
+     */
+    virtual ~MouseInterface() {}
+
+    /**
      * Return absolute position of the mouse
      */
     virtual void getPosition(int& x, int& y) const = 0;

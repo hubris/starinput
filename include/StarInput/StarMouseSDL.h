@@ -19,6 +19,11 @@ namespace Star
     }
 
     /**
+     * Destructor
+     */
+    virtual ~MouseSDL() {}
+
+    /**
      * Return absolute position of the mouse
      */
     virtual void getPosition(int& x, int& y) const

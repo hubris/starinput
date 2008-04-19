@@ -11,6 +11,11 @@ namespace Star
   {
   public:
     /**
+     * Destructor
+     */
+    virtual ~Input() {}
+
+    /**
      * Add a listener
      */
     void addListener(InputListener* listener);
