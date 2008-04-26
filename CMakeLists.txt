@@ -15,13 +15,13 @@ Remove the CMakeCache.txt file and try again from another folder, e.g.:
 endif(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 
 include(FindDoxygen)
-include(FindSDL)
+  
+find_package(SDL REQUIRED)
 
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/lib)
 
 include_directories (${STARMATH_INCLUDE_DIR} ${SDL_INCLUDE_DIR})
 add_subdirectory(src)
-add_subdirectory(include)
 
 if (DOXYGEN_FOUND)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
