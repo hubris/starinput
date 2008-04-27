@@ -4,14 +4,31 @@
 #include <StarUtils/StarSingleton.h>
 #include <StarInput/StarMouseSDL.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#include <StarInput/StarMouseDI8.h>
+#else
+#define HWND int
+#define HINSTANCE int
+#endif
+
 namespace Star
 {
   class Mouse : public Singleton<Mouse>
   {
   public:
     Mouse()
+    {      
+    }
+    
+    void
+    init(HWND hWnd, HINSTANCE hInst)
     {
+#ifdef WIN32
+      m_mouse = new MouseDI8(hWnd, hInst);
+#else
       m_mouse = new MouseSDL();
+#endif
     }
 
     ~Mouse()

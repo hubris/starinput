@@ -52,8 +52,8 @@ namespace Star
 
       if(m_buttonState != oldState) {
         for(int i = 1; i <= 5; i++) {
-          bool pressed = m_buttonState&SDL_BUTTON(i);
-          if(pressed != oldState&SDL_BUTTON(i))
+          bool pressed = (m_buttonState&SDL_BUTTON(i)) != 0;
+          if(pressed != (oldState&SDL_BUTTON(i)) )
             pressed?notifyListener(MouseButtonPressedEvent(i)):notifyListener(MouseButtonReleasedEvent(i));
         }
       }

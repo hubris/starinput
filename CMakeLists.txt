@@ -14,6 +14,12 @@ Remove the CMakeCache.txt file and try again from another folder, e.g.:
 ")
 endif(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
 
+if(WIN32)
+  include_directories($ENV{DXSDK_DIR}/Include)
+  link_directories($ENV{DXSDK_DIR}/Lib)
+  set(DI8_LIB dinput8 dxguid)
+endif(WIN32)
+
 include(FindDoxygen)
   
 find_package(SDL REQUIRED)
