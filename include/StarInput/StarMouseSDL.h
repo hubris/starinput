@@ -37,7 +37,7 @@ namespace Star
      */
     virtual bool isButtonPressed(int button) const
     {
-      return m_buttonState&SDL_BUTTON(button);
+      return (m_buttonState&SDL_BUTTON(button)) != 0;
     }
 
     /**
@@ -53,7 +53,8 @@ namespace Star
       if(m_buttonState != oldState) {
         for(int i = 1; i <= 5; i++) {
           bool pressed = (m_buttonState&SDL_BUTTON(i)) != 0;
-          if(pressed != (oldState&SDL_BUTTON(i)) )
+          bool oldPressed = (oldState&SDL_BUTTON(i)) != 0;
+          if(pressed != oldPressed )
             pressed?notifyListener(MouseButtonPressedEvent(i)):notifyListener(MouseButtonReleasedEvent(i));
         }
       }
